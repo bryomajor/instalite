@@ -45,3 +45,21 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.bio
+
+
+class Image(models.Model):
+    name = models.CharField(max_length = 60)
+    picture = ImageField(blank = True, manual_crop = '1080x1080')
+    caption = HTMLField()
+    posted = models.DateTimeField(auto_now_add=True)
+    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_det = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def is_liked(self):
+        pass
