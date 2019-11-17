@@ -63,3 +63,41 @@ class Image(models.Model):
 
     def is_liked(self):
         pass
+
+        
+    @classmethod
+    def update_caption(self, caption):
+        update_img = cls.objects.filter(id = id).update(caption = caption)
+        return update_img
+
+    @classmethod
+    def get_all_images(cls):
+        images = cls.objects.all()
+        return images
+
+    @classmethod
+    def get_image_by_id(cls, id):
+        image = cls.objects.filter(id = id).all()
+        return image
+
+    @classmethod
+    def get_profile_pic(cls, profile):
+        images = Image.objects.filter(profile__pk = profile)
+        return images
+
+    @property
+    def count_comments(self):
+        comments = self.comments.count()
+        return comments
+
+    @property
+    def count_likes(self):
+        likes = self.likes.count()
+        return likes
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['posted']
