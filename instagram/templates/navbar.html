@@ -1,0 +1,71 @@
+{% load bootstrap4 %}
+{% load static%}
+{{ form.media }}
+<nav class="navbar navbar-expand-lg navbar-light" id="navMain">
+    <div class="container navmarg">
+        <a class="smooth-scroll" href="/home"> <img src="{% static 'images/logo.png' %}" height="50" width="50" alt=""> <img src="" id="logo-name" class="brand"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 nav-search">
+                        <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
+                            <input class="form-control my-2 my-sm-0 search-input" name="username" type="search" placeholder="&#xf3ee; Search Users" aria-label="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link open-nav" href="{% url 'upload_image' %}" >
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p> Upload Image  </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link open-nav" href="#">
+                        <i class="far fa-heart"></i>
+                        <p> Discover People </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link open-nav" href="{% url 'profile' username=user %}">
+                        <i class="far fa-user show"></i>
+                        <p> Profile </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link open-nav" data-toggle="modal" data-target="#settings">
+                        <i class="fas fa-th"></i>
+                        <p> Settings </p>
+                    </a>
+
+                </li>
+
+            </ul>
+        </div>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="list-group">
+                <li class="list-group-item text-center"><a href="/accounts/password/change">Change Password</a></li>
+                <li class="list-group-item text-center"><a href="/logout/">Log Out</a></li>
+                <li class="list-group-item text-center"><a data-dismiss="modal">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
