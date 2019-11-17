@@ -186,3 +186,22 @@ def unfollow(request, user_id):
     return redirect('index')
 
 
+def like(request, image_id):
+    images = Image.objects.get(id = image_id, user=request.user).first()
+    print(liked)
+    if liked:
+        liked.delete()
+        return redirect('index')
+    else:
+        new_like = Likes(image = images, user = request.user)
+        likes = new_like.save_like()
+
+        return redirect('index')
+
+
+def is_liked(request):
+    id = request.user.id
+    liked_images = Likes.objects.filter(user_id=id)
+    mylist = [i.image_id for i in liked_images]
+    print(mylist)
+    return HttpResponse(liked_images)
