@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import SignupForm
+from .forms import SignupForm, ImageForm, CommentForm, ProfileForm
+from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
@@ -84,3 +86,32 @@ def comment(request, image_id):
 
     title = 'Home'
     return render(request, 'index.html', {'title':title})
+
+
+@login_required(login_url='/accounts/login/')
+def home(request):
+    title = 'Home'
+    return render(request, 'registration/home.html', {'title':title})
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request, username):
+    title = 'Profile'
+    profile = User.objects.get(username=username)
+    comments = Comments.objects.all()
+    users = User.objects.get(username=username)
+    follow = len(Follow.objects.followers(users))
+    following = len(Follow.objects.following(users))
+    people_following = Follow.objects.following(request.user)
+    id = request.user.id
+    liked_images = Likes.objects.filter(user_id=id)
+    mylist = [i.image_id for i in liked_images]
+    form = CommentForm()
+
+    try:
+        profile_details = Profile.get_by_id(profile.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+
+    images = Image.get_profile_pic(profile.id)
+    return render(request, 'profile/profile.html', {'title':title, 'comments':comments, 'profile':profile, 'profile_details':profile_details, 'images':images, 'follow':follow, 'following':following, 'list':mylist, 'people_following':people_following, 'form':form})
