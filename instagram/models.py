@@ -1,5 +1,5 @@
 from django.db import models
-import datetime as datetime
+import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.db.models.signals import post_save
@@ -126,3 +126,8 @@ class Comments(models.Model):
 
     def delete_comment(self):
         self.delete()
+
+    @classmethod
+    def get_comments_by_images(cls, id):
+        comments = Comments.objects.filter(image__pk = id)
+        return comments
