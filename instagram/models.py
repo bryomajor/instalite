@@ -101,3 +101,14 @@ class Image(models.Model):
 
     class Meta:
         ordering = ['posted']
+
+
+class Likes(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
+
+    def save_like(self):
+        self.save()
+
+    def unlike_like(self):
+        self.delete()
