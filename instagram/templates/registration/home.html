@@ -1,0 +1,33 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="frame">
+                <img src="/static/images/ig.png" alt="Handset Images">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <div class="section">
+                    <div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" alt="">
+                    </div>
+                    <div>
+                        {% if user.profile.photo %}
+                        <img src="{{user.profile.photo.cdn_url}}" alt="Profile Photo" class="img-thumbnail rounded-circle">
+                        {% else %}
+                        <img src="/static/images/avatar.jpg" alt="Avatar" class="img-thumbnail rounded-circle">
+                        {% endif %}
+                        <a href="/home" class="btn btn-sm btn-primary">Continue as {{request.user}}?</a>
+                        <p>Not {{request.user}}?<a href="/accounts/login/">Switch accounts</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
