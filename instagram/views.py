@@ -25,7 +25,7 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            current_site = get_current_site(reuest)
+            current_site = get_current_site(request)
             mail_subject = 'Activate Your Instagram Account'
             message = render_to_string('registration/acc_active_email.html', {
                 'user': user,
