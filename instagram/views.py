@@ -170,3 +170,10 @@ def upload_image(request):
                     form = ImageForm()
     
     return render(request, 'upload.html', {'form':form})
+
+
+def follow(request, user_id):
+    other_user = User.objects.get(id = user_id)
+    follow = Follow.objects.add_follower(request.user, other_user)
+
+    return redirect('index')
