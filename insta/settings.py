@@ -56,9 +56,11 @@ INSTALLED_APPS = [
     'bootstrap4',
     'pyuploadcare.dj',
     'tinymce',
+    'friendship',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
