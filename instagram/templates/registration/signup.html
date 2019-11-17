@@ -1,12 +1,12 @@
 {% extends 'registration/base.html' %}
-{% load bootstrap 4 %}
+{% load bootstrap4 %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="frame"></div>
-            <img src="" alt="Handset Images">
+            <img src="/static/images/ig.png" alt="Handset Images">
         </div>
         <div class="col-md-6">
             {% if form.errors %}
@@ -15,7 +15,7 @@
             <div class="signup-fields">
                 <div class="section">
                     <div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" alt="" class="img-fluid">
                     </div>
                     <div class="form-section">
                         <form method="post">
