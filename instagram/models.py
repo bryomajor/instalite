@@ -112,3 +112,17 @@ class Likes(models.Model):
 
     def unlike_like(self):
         self.delete()
+
+
+    
+class Comments(models.Model):
+    comment = models.CharField(max_length = 300)
+    posted_on = models.DateTimeField(auto_now=True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
