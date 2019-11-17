@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %}
+
+{{block.super}}
+
+<!-- Landing Page -->
+<div class="container top-margin">
+        {% if users%}
+        <h2>Found for {{users | length}} result(s) searched term {{message}}</h2>
+        <p class="text-muted"> Follow other users</p>
+        <hr>
+        <div class="contain col-sm-6 user">
+            {% for user in users %}
+            <div class="users">
+                {% if user.profile.photo %}
+                <img src="{{user.profile.photo.cdn_url}}" alt="profile-photo" class="img-thumbnail rounded-circle user">
+                {% else %}
+                <img src="/static/images/avatar.jpg" alt="avatar" class="img-thumbnail rounded-circle user">
+                {% endif %}
+                <a href="{% url 'profile' username=user.username %}" class="link">
+                <span class="list-inline username">{{user.username}}</span>
+                </a>
+                {% if user in following%}
+                    <a href="{%url 'unfollow' user_id=user.id %}" class="btn btn-sm btn-primary followbtn">Following</a>
+                {% else %}
+                    <a href="{%url 'follow' user_id=user.id %}" class="btn btn-sm btn-primary followbtn">Follow</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h2>Found 0 users for the search term {{message}}</h2>
+        {% endif %}
+</div>
+
+{% endblock %}
