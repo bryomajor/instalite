@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from .models import Image, Profile, Comments, Likes
 from .forms import SignupForm, ImageForm, CommentForm, ProfileForm
 from django.shortcuts import get_object_or_404
 
@@ -12,6 +13,9 @@ from django.utils.encoding import force_bytes, force_text
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+
+from friendship.models import Friend, Follow, Block
+from friendship.exceptions import AlreadyExistsError
 
 # Create your views here.
 def signup(request):
