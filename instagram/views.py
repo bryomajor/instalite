@@ -52,6 +52,17 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!''<br> If you have an account <a href="/accounts/login/"> Log in here </a>')
 
-
+@login_required(login_url='/accounts/login/')
 def timeline(request):
-    return render(request, 'timeline/index.html', )
+    images = Image.get_all_images()
+    likes = Likes.objects.all()
+    profiles = Profile.objects.all()
+    comments = Comments.objects.all()
+    profile_pic = User.objects.all()
+    following = Follow.objects.following(request.user)
+    form = CommentForm()
+    id = request.user.id
+    liked_images = Likes.objects.filter(user_id=id)
+    mylist = [i.image_id for i in liked_images]
+    title = 'Home'
+    return render(request, 'index.html', {'title':title, 'images':images, 'profile_pic':profile_pic, 'following': following, 'form':form, 'comments':comments, 'profiles':profiles, 'likes':likes, 'list':mylist})
