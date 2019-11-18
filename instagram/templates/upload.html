@@ -11,8 +11,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 mx-auto mt-5">
                 <div class="form-section" id="upload">
                     {{message}}
                     <form action="{% url 'upload_image' %}" method="POST" enctype="multipart/form-data">
@@ -22,7 +21,6 @@
                     </form>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 
