@@ -4,15 +4,15 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
+    <div class="row wide mt-5">
+        <div class="col-md-6">
             {% if profile_details.photo %}
-            <img src="{{profile_details.photo.cdn_url}}" alt="Profile Photo" class="img-fluid rounded-circle roundness">
+            <img src="{{profile_details.photo.cdn_url}}" alt="Profile Photo" width="200" height="200" class="" style="border-radius: 50%">
             {% else %}
-            <img src="/static/images/avatar.jpg" alt="Avatar" class="img-thumbnail rounded-circle">
+            <img src="/static/images/avatar.jpg" alt="Avatar" width="300" height="300" class="" style="border-radius: 50%">
             {% endif %}
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <span>{{ profile.username }}</span>
@@ -63,19 +63,17 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-5 wide">
         {% for image in images %}
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div>
-                <div>
                     <a data-toggle="modal" data-target="#{{image.id}}" class="img-overlay">
-                        <img src="{{image.picture.cdn_url}}" alt="">
+                        <img src="{{image.picture.cdn_url}}" alt="" class="img-fluid">
                         <div>
                             <i class="fas fa-heart"><span>{{image.count_likes}}</span></i>
                             <i class="fas fa-comment"><span>{{image.count_comments}}</span></i>
                         </div>
                     </a>
-                </div>
             </div>
         </div>
         {% empty %}
@@ -97,40 +95,16 @@
             <div class="modal-content dets">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-8">
-                            <a href="{% url 'like' image_id=image.id%}"><img id="img{{image.id}}" src="{{image.picture.cdn_url}}" class="img-thumbnail mod" alt="Image" style="cursor:pointer"></a>
+                        <div class="col-md-12">
+                            <a href="{% url 'like' image_id=image.id%}"><img id="img{{image.id}}" src="{{image.picture.cdn_url}}" class="img-fluid" alt="Image" style="cursor:pointer"></a>
                         </div>
-                        <div class="col-md-4">
-                            <div>
-                                {% if user.profile.photo %}
-                                <img src="{{user.profile.photo.cdn_url}}" alt="Profile Photo" class="img-thumbnail rounded-circle">
-                                {% else %}
-                                <img src="/static/images/avatar.jpg" alt="Avatar" class="img-thumbnail rounded-circle">
-                                {% endif %}
-                            </div>
-                            <strong class="list-inline">
-                                {{user.username}}
-                            </strong>
-                            <hr>
+                        <div class="col-md-12 mt-4">
                             <p class="inline">
                                 <strong class="list-inline">{{image.profile.username}}</strong>
                                 {% autoescape on %}
                                 <span class="list-inline">{{image.caption | safe}}</span>
                                 {% endautoescape %}
                             </p>
-                            <p class="text-muted">Comments</p>
-                            <hr>
-                            <div>
-                                {% for comment in comments %}
-                                {% if comment.image_id == image.id %}
-                                <div class="list-inline">
-                                    <p><strong>{{comment.user.username}}</strong>{{comment.comment}}</p>
-                                </div>
-                                {% else %}
-                                {% endif %}
-                                {% endfor %}
-                            </div>
-                            <hr>
                             {% if image.id in list %}
                             <i class="far fa-heart likedheart"></i>
                             {% else %}
@@ -140,6 +114,20 @@
                                 <i class="far fa-comment"></i>
                             </span>
                             <p>{{image.count_likes}} likes</p>
+                            <p class="text-muted">Comments</p>
+                            <hr>
+                            <div>
+                                {% for comment in comments %}
+                                {% if comment.image_id == image.id %}
+                                <div class="list-inline">
+                                    <p><strong>{{comment.user.username}}</strong></p>
+                                    <p>{{comment.comment}}</p>
+                                </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            
                             <p class="text-muted">Add a comment</p>
                             <form action="{% url 'comment' image_id=image.id %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
