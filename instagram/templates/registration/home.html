@@ -13,18 +13,18 @@
         <div class="col-md-6">
             <div>
                 <div class="section">
-                    <div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" alt="" class="img-fluid">
+                    <div class="logo mb-5 mt-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2000px-Instagram_logo.svg.png" alt="" class="img-fluid" width="300">
                     </div>
-                    <div>
+                    <div class="centre">
                         {% if user.profile.photo %}
-                        <img src="{{user.profile.photo.cdn_url}}" alt="Profile Photo" width="300" class="img-fluid rounded-circle roundness">
+                        <img src="{{user.profile.photo.cdn_url}}" alt="Profile Photo" width="300" height="300" class="" style="border-radius: 50%">
                         {% else %}
-                        <img src="/static/images/avatar.jpg" alt="Avatar" class="img-thumbnail rounded-circle">
+                        <img src="/static/images/avatar.jpg" alt="Avatar" width="300" height="300" class="" style="border-radius: 50%">
                         {% endif %}
                         <div class="clearfix"></div>
-                        <a href="/home" class="btn btn-sm btn-primary">Continue as {{request.user}}?</a>
-                        <p>Not {{request.user}}?<a href="/accounts/login/">Switch accounts</a></p>
+                        <a href="/home" class="btn btn-sm btn-primary login mt-3">Continue as {{request.user}}?</a>
+                        <p class="text-center mt-2">Not {{request.user}}?<a href="/accounts/login/"> Switch accounts</a></p>
                     </div>
                 </div>
             </div>
