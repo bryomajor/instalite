@@ -3,19 +3,19 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a id="v-pills-home-tab" href="#v-pills-home" data-toggle="pill" class="nav-link active side" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Profile</a>
                 <a class="nav-link side" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</a>
                 <a class="nav-link side" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Terms and Conditions</a>
                 {% if profile_details.photo %}
-                <img src="{{profile_details.photo.cdn_url}}" alt="Profile Photo" class="img-thumbnail rounded-circle profilepic">
+                <img src="{{profile_details.photo.cdn_url}}" alt="Profile Photo"  width="250" height="250" class="mt-5" style="border-radius: 50%">
                 {% else %}
-                <img src="/static/images/avatar.jpg" alt="Avatar" class="img-thumbnail rounded-circle">
+                <img src="/static/images/avatar.jpg" alt="Avatar"  width="250" height="250" class="" style="border-radius: 50%">
                 {% endif %}
                 <div>
-                    <span>{{ profile_details.user.username }}</span><br>
+                    <span><strong>{{ profile_details.user.username }}</strong></span><br>
                     <p>
                         {% autoescape on %}
                         {{profile_details.bio| safe}}
