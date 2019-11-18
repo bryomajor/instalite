@@ -5,26 +5,27 @@
 {{block.super}}
 
 <!-- Landing Page -->
-<div class="container top-margin">
+<div class="container mt-5">
         {% if users%}
         <h2>Found for {{users | length}} result(s) searched term {{message}}</h2>
-        <p class="text-muted"> Follow other users</p>
         <hr>
         <div class="contain col-sm-6 user">
             {% for user in users %}
             <div class="users">
                 {% if user.profile.photo %}
-                <img src="{{user.profile.photo.cdn_url}}" alt="profile-photo" class="img-thumbnail rounded-circle user">
+                <img src="{{user.profile.photo.cdn_url}}" alt="Profile Photo" width="70" height="70" class=""
+                style="border-radius: 50%">
                 {% else %}
-                <img src="/static/images/avatar.jpg" alt="avatar" class="img-thumbnail rounded-circle user">
+                <img src="/static/images/avatar.jpg" alt="Avatar"  width="70" height="70" class=""
+                style="border-radius: 50%">
                 {% endif %}
                 <a href="{% url 'profile' username=user.username %}" class="link">
-                <span class="list-inline username">{{user.username}}</span>
+                <span class="list-inline username ml-2">{{user.username}}</span>
                 </a>
                 {% if user in following%}
-                    <a href="{%url 'unfollow' user_id=user.id %}" class="btn btn-sm btn-primary followbtn">Following</a>
+                    <a href="{%url 'unfollow' user_id=user.id %}" class="btn btn-sm btn-primary ml-3">Following</a>
                 {% else %}
-                    <a href="{%url 'follow' user_id=user.id %}" class="btn btn-sm btn-primary followbtn">Follow</a>
+                    <a href="{%url 'follow' user_id=user.id %}" class="btn btn-sm btn-primary ml-3">Follow</a>
                 {% endif %}
             </div>
             {% endfor %}
