@@ -54,11 +54,11 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.''<a href="/accounts/login/"> Click here </a>')
+        return HttpResponse('<h2>Thank you for your email confirmation. Now you can login your account.</h2>''<a href="/accounts/login/" class="btn btn-primary"> Click here </a>')
     else:
-        return HttpResponse('Activation link is invalid!''<br> If you have an account <a href="/accounts/login/"> Log in here </a>')
+        return HttpResponse('<h2>Activation link is invalid!</h2>''<h3> If you have an account <a href="/accounts/login/"> Log in here </a></h3>')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/register/')
 def timeline(request):
     images = Image.get_all_images()
     likes = Likes.objects.all()
