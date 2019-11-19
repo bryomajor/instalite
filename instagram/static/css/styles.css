@@ -1,3 +1,9 @@
+body {
+    background-color: #f0f0f0;
+}
+.navbar {
+    background-color: #ffffff;
+}
 img .roundness {
     border-radius: 50% !important;
 }
@@ -61,4 +67,8 @@ img .roundness {
 .wide {
     width: 70%;
     margin: auto;
+}
+
+nav {
+    border-bottom: 1px solid #c7c7c7;
 }
