@@ -27,3 +27,7 @@ class ProfileTestClass(TestCase):
         Test to confirm that the object is being instantiated correctly
         '''
         self.assertTrue(isinstance(self.new_profile, Profile))
+
+    def test_save_method(self):
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile) > 0)
